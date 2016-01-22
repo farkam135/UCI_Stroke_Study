@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/survey_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="'Josefin Sans', sans-serif"
+        android:gravity="center"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="10"
+        android:text="Question"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="65sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/secondGroupAnswers"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/survey_answer3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="12.5dp"
+            android:layout_marginTop="12.5dp"
+            android:layout_weight="1"
+            android:background="#33ffffc8"
+            android:fontFamily="'Josefin Sans', sans-serif"
+            android:gravity="center"
+            android:onClick="submitAnswer"
+            android:padding="10dp"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="10"
+            android:text="Answer3"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/survey_answer4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12.5dp"
+            android:layout_marginTop="12.5dp"
+            android:layout_weight="1"
+            android:background="#33ffffc8"
+            android:fontFamily="'Josefin Sans', sans-serif"
+            android:gravity="center"
+            android:onClick="submitAnswer"
+            android:padding="10dp"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="10"
+            android:text="Answer4"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_above="@id/secondGroupAnswers">
+
+        <Button
+            android:id="@+id/survey_answer1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12.5dp"
+            android:layout_marginRight="12.5dp"
+            android:layout_weight="1"
+            android:background="#33ffffc8"
+            android:fontFamily="'Josefin Sans', sans-serif"
+            android:gravity="center"
+            android:onClick="submitAnswer"
+            android:padding="10dp"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="10"
+            android:text="Answer1"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/survey_answer2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12.5dp"
+            android:layout_marginLeft="12.5dp"
+            android:layout_weight="1"
+            android:background="#33ffffc8"
+            android:fontFamily="'Josefin Sans', sans-serif"
+            android:gravity="center"
+            android:onClick="submitAnswer"
+            android:padding="10dp"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="10"
+            android:text="Answer2"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</RelativeLayout>
