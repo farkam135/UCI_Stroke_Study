@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.text.InputType;
 import android.util.Log;
@@ -215,17 +216,30 @@ public class MainActivity extends Activity {
         param.put("txtAnswers", answers);
         param.put("txtScore", Integer.toString(score));
         param.put("userID", userID);
+        param.put("txtKey","7bf8e7e7d12eab31d14c5db848bde73c");
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setEnableRedirects(true);
-        client.post("http://www1.icts.uci.edu/telerehab/ed/updateed.aspx", param, new AsyncHttpResponseHandler() {
+        client.post("http://www1.icts.uci.edu/telerehab/ed/updateed2.aspx", param, new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                 // called when response HTTP status is "200 OK"
-                setContentView(R.layout.activity_main);
-                checkLocal();
-                ((Button)findViewById(R.id.siteLabel)).setText("Site " + siteNo);
+                String sResponse = new String(response);
+                if(sResponse.equals("ok")){
+                    setContentView(R.layout.activity_main);
+                    checkLocal();
+                    ((Button)findViewById(R.id.siteLabel)).setText("Site " + siteNo);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Saved Locally", Toast.LENGTH_SHORT).show();
+                    assessmentDatabase.execSQL("INSERT INTO assessments VALUES(null,'" + siteNo + "','" +  answers + "','" + Integer.toString(score) + "','" + userID + "');");
+
+                    setContentView(R.layout.activity_main);
+                    checkLocal();
+                    ((Button)findViewById(R.id.siteLabel)).setText("Site " + siteNo);
+                }
+
             }
 
             @Override
@@ -270,18 +284,27 @@ public class MainActivity extends Activity {
         param.put("txtAnswers", answers);
         param.put("txtScore", score);
         param.put("userID", userID);
+        param.put("txtKey","7bf8e7e7d12eab31d14c5db848bde73c");
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setEnableRedirects(true);
-        client.post("http://www1.icts.uci.edu/telerehab/ed/updateed.aspx", param, new AsyncHttpResponseHandler() {
+        client.post("http://www1.icts.uci.edu/telerehab/ed/updateed2.aspx", param, new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                 // called when response HTTP status is "200 OK
-                assessmentDatabase.delete("assessments", "id=" + id, null);
-                Cursor resultSet = assessmentDatabase.rawQuery("Select * from assessments", null);
-                if (resultSet.getCount() == 0) {
-                    Toast.makeText(MainActivity.this, "Assessments saved successfully!", Toast.LENGTH_SHORT).show();
+                String sResponse = new String(response);
+
+                if(sResponse.equals("ok")){
+                    assessmentDatabase.delete("assessments", "id=" + id, null);
+                    Cursor resultSet = assessmentDatabase.rawQuery("Select * from assessments", null);
+                    if (resultSet.getCount() == 0) {
+                        Toast.makeText(MainActivity.this, "Assessments saved successfully!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    findViewById(R.id.saveLocal).setVisibility(View.VISIBLE);
+                    Toast.makeText(MainActivity.this, "Some assessments failed to save, try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
 
